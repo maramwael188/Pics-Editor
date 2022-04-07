@@ -21,7 +21,19 @@ void saveImage(){
     strcat (imageFileName, ".bmp");
     writeGSBMP (imageFileName, image);
 }
-
+void blackWhiteImage(){
+    // nested for loops to loop on the pixels of image
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            // if pixels colors > 127, turn it to white
+            if (image[i][j] > 127)
+                image[i][j] = 255;
+            // else, turn them to black
+            else
+                image[i][j] = 0;
+        }
+    }
+}
 int main() {
     while (true) {
         cout << "What do you like to do: " << endl;
@@ -47,7 +59,7 @@ int main() {
         loadImage();
         switch (option) {
             case '1':
-
+                blackWhiteImage();
                 break;
             case '2':
 
