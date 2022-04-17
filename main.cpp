@@ -43,6 +43,42 @@ void invertImage(){
         }
     }
 }
+void darkenLightenImage(){
+    unsigned char light[SIZE][SIZE];
+    // load white image to merge with image to lighten it
+    char imageFileName[100] = "White";
+    strcat (imageFileName, ".bmp");
+    readGSBMP (imageFileName, light);
+    unsigned char dark[SIZE][SIZE];
+    // load black image to merge with image to darken it
+    char fileName[100] = "Black";
+    strcat (fileName, ".bmp");
+    readGSBMP (fileName, dark);
+    cout << "Do you want to darken or lighten the image?" << endl;
+    string choice;
+    cin >> choice;
+    if (choice == "lighten"){
+        unsigned char lightImage[SIZE][SIZE];
+        // nested for loops to loop on the matrix
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++){
+                // get the average of pixels of the two images
+             lightImage[i][j] = (image[i][j] + light[i][j])/2;
+             image[i][j] = lightImage[i][j];
+            }
+        }
+    }
+    if (choice == "darken"){
+        unsigned char darkImage[SIZE][SIZE];
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                // get the average of pixels of the two images
+                darkImage[i][j] = (image[i][j] + dark[i][j])/2;
+                image[i][j] = darkImage[i][j];
+            }
+        }
+    }
+}
 
 void mirrorImage(){
 cout << "Which part do you want to mirror: " << endl;
