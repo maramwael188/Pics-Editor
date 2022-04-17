@@ -34,6 +34,15 @@ void blackWhiteImage(){
         }
     }
 }
+void invertImage(){
+    // nested for loops to loop on the matrix
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            // subtract image pixels from 255 to get white or black colors
+            image[i][j] = 255 - image[i][j];
+        }
+    }
+}
 int main() {
     while (true) {
         cout << "What do you like to do: " << endl;
@@ -62,7 +71,7 @@ int main() {
                 blackWhiteImage();
                 break;
             case '2':
-
+                invertImage();
                 break;
             case '3':
 
