@@ -43,6 +43,88 @@ void invertImage(){
         }
     }
 }
+
+void mirrorImage(){
+cout << "Which part do you want to mirror: " << endl;
+cout << "1-Upper." << endl;
+cout << "2-Lower." << endl;
+cout << "3-Right." << endl;
+cout << "4-Left." << endl;
+char choice;
+cin >> choice;
+if(choice == '1'){
+    unsigned char upperImage[SIZE][SIZE];
+    for (int i = 0; i < half_size; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            upperImage[i][j] = image[i][j];
+        }
+    }
+    for (int i = SIZE - 1; i >= half_size; i--) {
+        for (int j = SIZE - 1; j >= 0; j--) {
+            upperImage[i][j] = image[SIZE - 1 - i][j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = upperImage[i][j];
+        }
+    }
+}
+if (choice == '2'){
+    unsigned char lowerImage[SIZE][SIZE];
+    for (int i = SIZE - 1; i >= half_size; i--) {
+        for (int j = SIZE - 1; j >= 0; j--) {
+            lowerImage[i][j] = image[i][j];
+        }
+    }
+    for (int i = 0; i < half_size; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            lowerImage[i][j] = image[SIZE - 1 - i][j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = lowerImage[i][j];
+        }
+    }
+}
+if (choice == '3'){
+    unsigned char rightImage[SIZE][SIZE];
+    for (int i = SIZE - 1; i >= 0; i--) {
+        for (int j = SIZE - 1; j >= half_size; j--) {
+            rightImage[i][j] = image[i][j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < half_size; j++) {
+            rightImage[i][j] = image[i][SIZE - 1 - j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = rightImage[i][j];
+        }
+    }
+}
+if (choice == '4'){
+    unsigned char leftImage[SIZE][SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < half_size; j++) {
+            leftImage[i][j] = image[i][j];
+        }
+    }
+    for (int i = SIZE - 1; i >= 0; i--) {
+        for (int j = SIZE - 1; j >= half_size; j--) {
+            leftImage[i][j] = image[i][SIZE - 1 - j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = leftImage[i][j];
+        }
+    }
+}
+}
 int main() {
     while (true) {
         cout << "What do you like to do: " << endl;
