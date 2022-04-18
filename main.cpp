@@ -43,6 +43,41 @@ void invertImage(){
         }
     }
 }
+
+
+void mergeImage()
+{
+    unsigned char mergedImage[SIZE][SIZE];
+    unsigned char image2[SIZE][SIZE];
+    char mergedImageFileName[100];
+    // load another image to merge with the first image
+    cout << "Enter the image file name you want to merge with: ";
+    cin >> mergedImageFileName;
+    strcat(mergedImageFileName, ".bmp");
+    readGSBMP(mergedImageFileName, image2);
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            // get the average of pixels of the two images
+            mergedImage[i][j] = (image[i][j] + image2[i][j]) / 2;
+            image[i][j] = mergedImage[i][j];
+        }
+    }
+}
+void flipImage(){
+    unsigned char newImage[SIZE][SIZE];
+    // nested for loops to loop on the matrix
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            newImage[i][j] = image[SIZE - i][j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = newImage[i][j];
+        }
+    }
+}
+
 void darkenLightenImage(){
     unsigned char light[SIZE][SIZE];
     // load white image to merge with image to lighten it
@@ -192,10 +227,10 @@ int main() {
                 invertImage();
                 break;
             case '3':
-
+                mergeImage()
                 break;
             case '4':
-
+                flipImage()
                 break;
             case '5':
 
