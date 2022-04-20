@@ -114,7 +114,105 @@ void darkenLightenImage(){
         }
     }
 }
-
+void enlargeImage() {
+    cout << "Which part do you want to enlarge:" << endl;
+    cout << "1-1st quarter" << endl;
+    cout << "2-2nd quarter" << endl;
+    cout << "3-3rd quarter" << endl;
+    cout << "4-4th quarter" << endl;
+    int option;
+    cin >> option;
+    if (option == 1) {
+        unsigned char newImage[SIZE][SIZE];
+        //0,0 => 0,0 & 0,1 & 1,0 & 1,1
+        //0,1 => 0,2 & 0,3 & 1,2 & 1,3
+        int column_start_pointer = 0;
+        int row_start_pointer = 0;
+        for (int i = 0; i < half_size; i++) {
+            for (int j = 0; j < half_size; j++) {
+                for (int m = 0; m < 2; m++) {
+                    for (int k = 0; k < 2; k++) {
+                        newImage[row_start_pointer + m][column_start_pointer + k] = image[i][j];
+                    }
+                }
+                column_start_pointer += 2;
+            }
+            column_start_pointer = 0;
+            row_start_pointer += 2;
+        }
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image[i][j] = newImage[i][j];
+            }
+        }
+    }
+   if (option == 2){
+       unsigned char newImage[SIZE][SIZE];
+       int column_start_pointer = 0;
+       int row_start_pointer = 0;
+       for (int i = 0; i < half_size; i++) {
+           for (int j = half_size; j < SIZE; j++) {
+               for(int m = 0;m < 2;m++){
+                   for(int k = 0;k < 2;k++){
+                       newImage[row_start_pointer + m][column_start_pointer + k] = image[i][j];
+                   }
+               }
+               column_start_pointer += 2;
+           }
+           column_start_pointer = 0;
+           row_start_pointer += 2;
+       }
+       for (int i = 0; i < SIZE; i++) {
+           for (int j = 0; j< SIZE; j++) {
+               image[i][j] = newImage[i][j];
+           }
+       }
+  }
+  if (option == 3){
+      unsigned char newImage[SIZE][SIZE];
+      int column_start_pointer = 0;
+      int row_start_pointer = 0;
+      for (int i = half_size; i < SIZE; i++) {
+          for (int j = 0; j < half_size; j++) {
+              for(int m = 0;m < 2;m++){
+                  for(int k = 0;k < 2;k++){
+                      newImage[row_start_pointer + m][column_start_pointer + k] = image[i][j];
+                  }
+              }
+              column_start_pointer += 2;
+          }
+          column_start_pointer = 0;
+          row_start_pointer += 2;
+      }
+      for (int i = 0; i < SIZE; i++) {
+          for (int j = 0; j< SIZE; j++) {
+               image[i][j] = newImage[i][j];
+          }
+      }
+  }
+  if (option == 4){
+      unsigned char newImage[SIZE][SIZE];
+      int column_start_pointer = 0;
+      int row_start_pointer = 0;
+      for (int i = half_size; i < SIZE; i++) {
+          for (int j = half_size; j < SIZE; j++) {
+              for(int m = 0;m < 2;m++){
+                  for(int k = 0;k < 2;k++){
+                      newImage[row_start_pointer + m][column_start_pointer + k] = image[i][j];
+                  }
+              }
+              column_start_pointer += 2;
+          }
+          column_start_pointer = 0;
+          row_start_pointer += 2;
+      }
+      for (int i = 0; i < SIZE; i++) {
+          for (int j = 0; j< SIZE; j++) {
+              image[i][j] = newImage[i][j];
+          }
+      }
+  }
+}
 void mirrorImage(){
 cout << "Which part do you want to mirror: " << endl;
 cout << "1-Upper." << endl;
@@ -242,7 +340,7 @@ int main() {
 
                 break;
             case '8':
-
+                enlargeimage();
                 break;
             case '9':
 
