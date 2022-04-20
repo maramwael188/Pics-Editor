@@ -114,6 +114,80 @@ void darkenLightenImage(){
         }
     }
 }
+int get_average(unsigned char image[SIZE][SIZE],int row,int column,int kernel_size){
+    int half_size = floor(kernel_size / 2);
+    int row_start = row - half_size >= 0 ? row - half_size : 0;
+    int column_start = column - half_size >= 0 ? column - half_size : 0;
+    int sum_siblings = {0};
+    int counter = 0;
+    for(int i = 0;i < kernel_size;i++){
+        if (row_start + i >= SIZE){
+            break;
+        }
+        for(int j = 0;j < kernel_size;j++){
+            if (column_start + j >= SIZE){
+                break;
+            }
+            sum_siblings += image[row_start + i][column_start + j];
+            counter += 1;
+        }
+    }
+
+    return sum_siblings / (counter);
+
+}
+void blurImage() {
+    unsigned char newImage[SIZE][SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            int average {get_average(image,i,j,10)};
+            newImage[i][j] = average;
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = newImage[i][j];
+        }
+    }
+
+}
+int get_average(unsigned char image[SIZE][SIZE],int row,int column,int kernel_size){
+    int half_size = floor(kernel_size / 2);
+    int row_start = row - half_size >= 0 ? row - half_size : 0;
+    int column_start = column - half_size >= 0 ? column - half_size : 0;
+    int sum_siblings = {0};
+    int counter = 0;
+    for(int i = 0;i < kernel_size;i++){
+        if (row_start + i >= SIZE){
+            break;
+        }
+        for(int j = 0;j < kernel_size;j++){
+            if (column_start + j >= SIZE){
+                break;
+            }
+            sum_siblings += image[row_start + i][column_start + j];
+            counter += 1;
+        }
+    }
+
+    return sum_siblings / (counter);
+
+}
+void blurImage() {
+    unsigned char newImage[SIZE][SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            int average {get_average(image,i,j,10)};
+            newImage[i][j] = average;
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = newImage[i][j];
+        }
+    }
+
+}
 void enlargeImage() {
     cout << "Which part do you want to enlarge:" << endl;
     cout << "1-1st quarter" << endl;
