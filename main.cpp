@@ -452,7 +452,53 @@ void detectImageEdges() {
         }
     }
 
-
+void shrinkImage() {
+    cout << "enter what you want to do: " << endl;
+    cout << "1-Shrink image to 1/2." << endl;
+    cout << "2-Shrink image to 1/3." << endl;
+    cout << "3-Shrink image to 1/4." << endl;
+    int choice;
+    cin >> choice;
+    if (choice == 1) {
+         int c = 0;
+         for (int i = 0; i < SIZE; i += 2) {
+            int d = 0;
+            for (int j = 0; j < SIZE; j += 2) {
+                image[c][d] = ((image[i][j] + image[i + 1][j] + image[i][j + 1] + image[i + 1][j + 1]) / 4);
+                d++;
+            }
+            c++;
+        }
+    }
+    if (choice == 2) {
+        int c = 0;
+        for (int i = 0; i < SIZE; i += 3) {
+            int d = 0;
+            for (int j = 0; j < SIZE; j += 3) {
+                image[c][d] = (
+                        (image[i][j] + image[i + 1][j] + image[i][j + 1] + image[i + 1][j + 1] + image[i][j + 2] +
+                         image[i + 2][j] + image[i + 2][i + 2] + image[i + 1][j + 2] + image[i + 2][j + 1]) / 9);
+                d++;
+            }
+            c++;
+        }
+    }
+    if (choice == 3) {
+        int c = 0;
+        for (int i = 0; i < SIZE; i += 4) {
+            int d = 0;
+            for (int j = 0; j < SIZE; j += 4) {
+                image[c][d] = (
+                        (image[i][j] + image[i + 1][j] + image[i][j + 1] + image[i + 1][j + 1] + image[i][j + 2] +
+                         image[i + 2][j] + image[i + 2][i + 2] + image[i + 1][j + 2] + image[i + 2][j + 1] +
+                         image[i + 3][j] + image[i][j + 3] + image[i + 1][j + 3] + image[i + 3][j + 1] +
+                         image[i + 3][j + 2] + image[i + 2][j + 3]) / 16);
+                d++;
+            }
+            c++;
+        }
+    }
+}
 int main() {
     while (true) {
         cout << "What do you like to do: " << endl;
@@ -502,7 +548,7 @@ int main() {
                 enlargeimage();
                 break;
             case '9':
-
+                shrinkImage()
                 break;
             case 'a':
                 mirrorImage();
