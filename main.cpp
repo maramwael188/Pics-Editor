@@ -368,6 +368,46 @@ if (choice == '4'){
     }
 }
 }
+int get_kernel(unsigned char image[SIZE][SIZE],int row,int column){
+    if (row == 0 || row == SIZE - 1){
+        return 0;
+    }
+    if (column == 0 || column == SIZE - 1){
+        return 0;
+    }
+    int rt_sibling_pixel {image[row][column + 1]};
+    int lft_sibling_pixel {image[row][column - 1]};
+    int tp_lft_sibling_pixel {image[row + 1][column - 1]};
+    int tp_rt_sibling_pixel {image[row + 1][column + 1]};
+    int bt_lft_sibling_pixel {image[row - 1][column - 1]};
+    int bt_rt_sibling_pixel {image[row - 1][column + 1]};
+    int act_pixel {image[row][column]};
+    int tp_sibling_pixel{image[row + 1][column]};
+    int bt_sibling_pixel{image[row - 1][column]};
+    int gx {-1*(lft_sibling_pixel + tp_lft_sibling_pixel + bt_lft_sibling_pixel) + (rt_sibling_pixel + tp_rt_sibling_pixel + bt_rt_sibling_pixel)};
+    int gy {-1*(bt_lft_sibling_pixel + bt_rt_sibling_pixel + bt_sibling_pixel) + (tp_lft_sibling_pixel + tp_rt_sibling_pixel + tp_sibling_pixel)};
+    return sqrt((gx*gx) + (gy*gy));
+
+}
+void detectImageEdges() {
+    unsigned char newImage[SIZE][SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            int kernel_number {get_kernel(image,i,j)};
+            if (kernel_number > 180){
+                newImage[i][j] = 0;
+            }else{
+                newImage[i][j] = 255;
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = newImage[i][j];
+        }
+    }
+
+
 int main() {
     while (true) {
         cout << "What do you like to do: " << endl;
