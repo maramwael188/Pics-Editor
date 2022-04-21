@@ -77,6 +77,51 @@ void flipImage(){
         }
     }
 }
+void rotateImage() {
+    unsigned char newImage[SIZE][SIZE];
+    cout << "Choose degree of rotation:" << endl;
+    cout << "1-90 degrees." << endl;
+    cout << "2-180 degrees." << endl;
+    cout << "3-270 degrees." << endl;
+    int option;
+    cin >> option;
+    if (option == 1) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int i = 0; i < SIZE; i++) {
+                newImage[j][255 - i] = image[i][j];
+            }
+        }
+        for (int i = 0; i < SIZE; i++){
+            for (int j = 0; j < SIZE; j++){
+                image[i][j] = newImage[i][j];
+            }
+        }
+    }
+    if (option == 2) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                newImage[255 - i][255 - j] = image[i][j];
+            }
+        }
+        for (int i = 0; i < SIZE; i++){
+            for (int j = 0; j < SIZE; j++){
+                image[i][j] = newImage[i][j];
+            }
+        }
+    }
+    if (option == 3) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int i = 0; i < SIZE; i++) {
+                newImage[255 - j][i] = image[i][j];
+            }
+        }
+        for (int i = 0; i < SIZE; i++){
+            for (int j = 0; j < SIZE; j++){
+                image[i][j] = newImage[i][j];
+            }
+        }
+    }
+}
 
 void darkenLightenImage(){
     unsigned char light[SIZE][SIZE];
@@ -445,13 +490,13 @@ int main() {
                 flipImage()
                 break;
             case '5':
-
+                rotateImage();
                 break;
             case '6':
-
+                darkenLightenImage();
                 break;
             case '7':
-
+                detectImageEdges()
                 break;
             case '8':
                 enlargeimage();
@@ -460,13 +505,13 @@ int main() {
 
                 break;
             case 'a':
-
+                mirrorImage();
                 break;
             case 'b':
 
                 break;
             case 'c':
-
+                blurImage();
                 break;
         }
         saveImage();
