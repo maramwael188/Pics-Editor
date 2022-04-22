@@ -332,6 +332,64 @@ void enlargeImage() {
       }
   }
 }
+
+void input_user (int& a , int& b  ,char c){
+    if (c == '1')
+        a = 0 , b = 0 ;
+    else if (c == '2')
+        a = 0 , b = 128;
+    else if (c == '3')
+        a = 128 , b = 0 ;
+    else if (c == '4')
+        a = 128 , b = 128 ;
+    else
+        cout << "please enter the correct order"<<endl;
+}
+
+void Shuffle_Filter()
+{
+    char c1 , c2 ,c3 ,c4 ;
+    int a = 0 , b = 0 ;
+    cout << "what is the order wold you like : ";
+    cin  >> c1 >> c2 >> c3 >> c4 ;
+    
+    // First Quarter
+    input_user(a,b,c1);
+    for (int i = 0  , x = a; i < SIZE/2; x++ , i++)
+    {
+        for (int j =0 , y = b ; j< SIZE/2 ; y++ , j++)
+            (newimage[i][j]=image[x][y]);
+    }
+    
+    // Second Quarter
+    input_user(a,b,c2);
+    for (int i = 0  , x = a; i < SIZE/2; x++ , i++)
+    {
+        for (int j =128 , y = b ; j< SIZE ; y++ , j++)
+            (newimage[i][j]=image[x][y]);
+    }
+    // Third Quarter
+    input_user(a,b,c3);
+    for (int i = 128  , x = a; i < SIZE; x++ , i++)
+    {
+        for (int j =0 , y = b ; j< SIZE/2 ; y++ , j++)
+            (newimage[i][j]=image[x][y]);
+    }
+    // Fourth Quarter
+    input_user(a,b,c4);
+    for (int i = 128  , x = a; i < SIZE; x++ , i++)
+    {
+        for (int j =128 , y = b ; j< SIZE ; y++ , j++)
+            (newimage[i][j]=image[x][y]);
+    }
+    for (int i =0; i < SIZE; i++){
+        for (int j =0; j<SIZE; j++){
+
+            image[i][j]= newimage[i][j];
+        }
+    }
+}
+
 void mirrorImage(){
 cout << "Which part do you want to mirror: " << endl;
 cout << "1-Upper." << endl;
